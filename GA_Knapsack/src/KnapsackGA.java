@@ -30,21 +30,27 @@ public class KnapsackGA {
 	            rouletteWheel.add(totalFitness);
 	        }
 	        
-	        Random random=new Random();
-
-	        int random1=random.nextInt(totalFitness),random2=random.nextInt(totalFitness);
-	        
-	        for(int i=0;i<rouletteWheel.size()-1;i++){
-	            if(selected.size()==2)
-	                break;
-	            if(random1>=rouletteWheel.get(i)&&random1<rouletteWheel.get(i+1)){
-	                selected.add(i);
-	            }
-	            if(random2>=rouletteWheel.get(i)&&random2<rouletteWheel.get(i+1)){
-	                selected.add(i);
-	            }
-	        }
-	        return selected;
+	        Random random = new Random();
+			for (int x = 0; x < pop.size() / 2; x++) {
+			
+				int random1 = random.nextInt(totalFitness), random2 = random.nextInt(totalFitness);
+				Vector<Integer> s = new Vector<Integer>();
+			
+				for (int i = 0; i < rouletteWheel.size() - 1; i++) {
+					if (s.size() == 2)
+						break;
+					if (random1 >= rouletteWheel.get(i) && random1 < rouletteWheel.get(i + 1)) {
+						s.add(i);
+					}
+					if (random2 >= rouletteWheel.get(i) && random2 < rouletteWheel.get(i + 1)) {
+						s.add(i);
+					}
+				}
+			
+			selected.add(s.get(0));
+			selected.add(s.get(1));
+			}
+			return selected;
 
 	    }
 		
