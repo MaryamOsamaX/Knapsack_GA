@@ -110,7 +110,11 @@ public class KnapsackGA {
 		for (int i = 0; i < pop.size(); i++) {
 			if (bestV < pop.get(i).fitness) {
 				bestV = pop.get(i).fitness;
-				sol = pop.get(i);
+				for(int j=0;j<sol.genes.length;j++) {
+					sol.genes[j] = pop.get(i).genes[j];
+				}
+				
+				//System.out.println("best value = "+bestV+" -> "+Arrays.toString(sol.genes));
 			}
 		}
 	}
