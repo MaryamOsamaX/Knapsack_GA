@@ -15,7 +15,7 @@ public class Chromosome {
 		Random rand = new Random();
 		for (int i = 0; i < genes.length; i++) {
 			double value = rand.nextDouble();
-			if (value <= 0.5) {
+			if (value <= 0.6) {
 				genes[i] = 1;
 			} 
 			else
