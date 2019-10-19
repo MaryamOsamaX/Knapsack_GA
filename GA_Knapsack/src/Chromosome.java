@@ -1,8 +1,8 @@
 import java.util.*;
 
 public class Chromosome {
-	int[] genes;
-	int fitness;
+	public int[] genes;
+	public double fitness;
 
 	public Chromosome(int chromosomeLength) {
 		this.genes = new int[chromosomeLength];
@@ -30,7 +30,7 @@ public class Chromosome {
 			totalValue += items[i].value * genes[i];
 		}
 		if (totalWeight > s) {
-			fitness = 1; // why not 0
+			fitness = 1 / totalWeight; 
 		} else {
 			fitness = totalValue;
 		}

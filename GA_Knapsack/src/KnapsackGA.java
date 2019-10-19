@@ -25,6 +25,7 @@ public class KnapsackGA {
 	        Vector<Integer> rouletteWheel = new Vector<Integer>();
 	        rouletteWheel.add(0);
 	        int totalFitness=0;
+	        ///initialize the roulette wheel 
 	        for(int i=0;i<pop.size();i++){
 	            totalFitness+=pop.get(i).fitness;
 	            rouletteWheel.add(totalFitness);
@@ -54,4 +55,21 @@ public class KnapsackGA {
 
 	    }
 		
+		 public Vector<Integer> crossOver(Vector<Integer>selected){
+
+		        Random random=new Random();
+		        for(int k=0 ; k< selected.size()/2 -1 ; k+=2) {
+		        double r=random.nextDouble();
+		        if(r<=0.7){
+		            int begin=random.nextInt(n-1);
+		            for(int i=begin;i<n;i++){
+		                int temp=pop.get(selected.get(k)).genes[i];
+		                pop.get(selected.get(k)).genes[i]=pop.get(selected.get(k+1)).genes[i];
+		                pop.get(selected.get(k+1)).genes[i]=temp;
+		            }
+
+		        }
+		        }
+		        return selected;
+		    }
 }
