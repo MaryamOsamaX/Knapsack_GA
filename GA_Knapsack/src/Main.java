@@ -7,7 +7,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		BufferedReader reader;
-		Vector<Item> items=new Vector<Item>();
 
 		try {
 			reader = new BufferedReader(new FileReader("src/input_example.txt"));
@@ -17,7 +16,7 @@ public class Main {
 			
 			for(int i=0 ; i<C; i++)
 			{
-
+				Vector<Item> items=new Vector<Item>();
 				int N= Integer.parseInt(reader.readLine()); ///num of items
 				int S= Integer.parseInt(reader.readLine());///knapsack size
 				for(int j=0; j<N;j++)
