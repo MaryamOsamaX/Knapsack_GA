@@ -9,6 +9,8 @@ public class Chromosome {
 		this.fitness = 0;
 	}
 
+
+
 	public void generateGenes() {
 		Random rand = new Random();
 		for (int i = 0; i < genes.length; i++) {
@@ -21,13 +23,13 @@ public class Chromosome {
 		}
 	}
 
-	public void calcFitness(Item[] items, int s) {
+	public void calcFitness(Vector<Item> items, int s) {
 		int totalWeight = 0;
 		int totalValue = 0;
 
 		for (int i = 0; i < genes.length; i++) {
-			totalWeight += items[i].weight * genes[i];
-			totalValue += items[i].value * genes[i];
+			totalWeight += items.get(i).weight * genes[i];
+			totalValue += items.get(i).value * genes[i];
 		}
 		if (totalWeight > s) {
 			fitness = 1 / totalWeight; 
