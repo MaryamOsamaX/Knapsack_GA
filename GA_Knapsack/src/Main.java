@@ -6,6 +6,8 @@ public class Main {
 	public static void main(String[] args) {
 		BufferedReader reader;
 		int max_generation=50;
+		String out="";
+		
 		try {
 			reader = new BufferedReader(new FileReader("src/input_example.txt"));
 			int C = Integer.parseInt(reader.readLine());///num of test cases
@@ -27,8 +29,8 @@ public class Main {
 				items.add(new Item( Integer.parseInt(arr[0]),Integer.parseInt(arr[1])));
 				//System.out.println("Item"+ j +"= "+Integer.parseInt(arr[0])+" "+Integer.parseInt(arr[1]));
 				}
-				KnapsackGA ks=new KnapsackGA(200,N,S,items);
-				//call rest of functions 
+				KnapsackGA ks=new KnapsackGA(500,N,S,items);
+				//call functions 
 				for(int g=0;g<max_generation;g++){
 		            ks.calcPopFitness();
 		            ks.updateSolution();
@@ -41,13 +43,14 @@ public class Main {
 
 				ks.updateSolution();
 				
-				System.out.println("Case "+(i+1) +" : "+ks.bestV);
+				
+				String ss="";
 				for(int x=0;x<N;x++) {
 					if(ks.sol.genes[x] == 1) {
-						System.out.println(items.get(x).weight+" "+items.get(x).value);
+						ss+=items.get(x).weight+" "+items.get(x).value+"\n";
 					}
 				}
-				
+				out+="Case "+(i+1) +" : "+(int)ks.bestV+"\n"+ss;
 
 				if(i!=C-1)
 				{
@@ -64,10 +67,20 @@ public class Main {
 			
 			
 			reader.close();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	 
+		BufferedWriter writer;
+		try {
+			writer = new BufferedWriter(new FileWriter("src/output.txt"));
+			writer.write(out);
+		    writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
 		
 
 	}

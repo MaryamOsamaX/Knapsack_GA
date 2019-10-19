@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 
 public class KnapsackGA {
@@ -8,20 +9,20 @@ public class KnapsackGA {
 	Chromosome sol;
 
 	KnapsackGA(int popS, int n, int s, Vector<Item> itemp) {
-		bestV=0;
-		sol= new Chromosome(n);
-/*		for(int i=0;i<n;i++) {
-			sol.genes[i]=0;
-		}*/
+		bestV = 0;
+		sol = new Chromosome(n);
+		/*
+		 * for(int i=0;i<n;i++) { sol.genes[i]=0; }
+		 */
 		sol.generateGenes();
-		
+
 		pop = new Vector<Chromosome>();
 		items = new Vector<Item>();
 		items = itemp;
 		popSize = popS;
 		this.n = n;
 		this.s = s;
-		
+
 		for (int i = 0; i < popS; i++) {
 			pop.add(new Chromosome(n));
 			pop.get(i).generateGenes();
@@ -42,23 +43,25 @@ public class KnapsackGA {
 
 		Random random = new Random();
 		for (int x = 0; x < pop.size() / 2; x++) {
-///error if total fitness =0
-			int random1 = random.nextInt(totalFitness), random2 = random.nextInt(totalFitness);
-			Vector<Integer> s = new Vector<Integer>();
+			if (totalFitness != 0) {
+				int random1 = random.nextInt(totalFitness), random2 = random.nextInt(totalFitness);
+				Vector<Integer> s = new Vector<Integer>();
 
-			for (int i = 0; i < rouletteWheel.size() - 1; i++) {
-				if (s.size() == 2)
-					break;
-				if (random1 >= rouletteWheel.get(i) && random1 < rouletteWheel.get(i + 1)) {
-					s.add(i);
+				for (int i = 0; i < rouletteWheel.size() - 1; i++) {
+					if (s.size() == 2)
+						break;
+					if (random1 >= rouletteWheel.get(i) && random1 < rouletteWheel.get(i + 1)) {
+						s.add(i);
+					}
+					if (random2 >= rouletteWheel.get(i) && random2 < rouletteWheel.get(i + 1)) {
+						s.add(i);
+					}
 				}
-				if (random2 >= rouletteWheel.get(i) && random2 < rouletteWheel.get(i + 1)) {
-					s.add(i);
-				}
+
+				selected.add(s.get(0));
+				selected.add(s.get(1));
 			}
 
-			selected.add(s.get(0));
-			selected.add(s.get(1));
 		}
 		return selected;
 
@@ -96,19 +99,20 @@ public class KnapsackGA {
 			}
 		}
 	}
+
 	public void calcPopFitness() {
-		for(int i=0;i<pop.size();i++){
-            pop.get(i).calcFitness(items, s);
-        }
+		for (int i = 0; i < pop.size(); i++) {
+			pop.get(i).calcFitness(items, s);
+		}
 	}
-	
+
 	public void updateSolution() {
-		for(int i=0;i<pop.size();i++){
-            if(bestV<pop.get(i).fitness){
-            	bestV=pop.get(i).fitness;
-            	sol=pop.get(i);
-            }
-        }
+		for (int i = 0; i < pop.size(); i++) {
+			if (bestV < pop.get(i).fitness) {
+				bestV = pop.get(i).fitness;
+				sol = pop.get(i);
+			}
+		}
 	}
-	
+
 }
