@@ -4,14 +4,24 @@ public class KnapsackGA {
 	Vector<Chromosome> pop;
 	Vector<Item> items;
 	int popSize, n, s;
+	double bestV;
+	Chromosome sol;
 
 	KnapsackGA(int popS, int n, int s, Vector<Item> itemp) {
+		bestV=0;
+		sol= new Chromosome(n);
+/*		for(int i=0;i<n;i++) {
+			sol.genes[i]=0;
+		}*/
+		sol.generateGenes();
+		
 		pop = new Vector<Chromosome>();
 		items = new Vector<Item>();
 		items = itemp;
 		popSize = popS;
 		this.n = n;
 		this.s = s;
+		
 		for (int i = 0; i < popS; i++) {
 			pop.add(new Chromosome(n));
 			pop.get(i).generateGenes();
@@ -32,7 +42,7 @@ public class KnapsackGA {
 
 		Random random = new Random();
 		for (int x = 0; x < pop.size() / 2; x++) {
-
+///error if total fitness =0
 			int random1 = random.nextInt(totalFitness), random2 = random.nextInt(totalFitness);
 			Vector<Integer> s = new Vector<Integer>();
 
@@ -86,4 +96,19 @@ public class KnapsackGA {
 			}
 		}
 	}
+	public void calcPopFitness() {
+		for(int i=0;i<pop.size();i++){
+            pop.get(i).calcFitness(items, s);
+        }
+	}
+	
+	public void updateSolution() {
+		for(int i=0;i<pop.size();i++){
+            if(bestV<pop.get(i).fitness){
+            	bestV=pop.get(i).fitness;
+            	sol=pop.get(i);
+            }
+        }
+	}
+	
 }
