@@ -28,7 +28,7 @@ public class Main {
 					items.add(new Item(Integer.parseInt(arr[0]), Integer.parseInt(arr[1])));
 					//System.out.println("Item"+ j +"= "+Integer.parseInt(arr[0])+" "+Integer.parseInt(arr[1]));
 				}
-				KnapsackGA ks = new KnapsackGA(1000, N, S, items);
+				KnapsackGA ks = new KnapsackGA(2000, N, S, items);
 				// call functions
 				for (int g = 0; g < max_generation; g++) {
 					ks.calcPopFitness();
@@ -39,7 +39,7 @@ public class Main {
 
 				}
 
-				//ks.updateSolution();
+				ks.updateSolution();
 
 				String ss = "";
 				for (int x = 0; x < N; x++) {
@@ -72,7 +72,7 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println("Finish");
 	}
 
 }

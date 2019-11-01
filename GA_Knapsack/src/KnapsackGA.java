@@ -9,13 +9,13 @@ public class KnapsackGA {
 	Chromosome sol;
 
 	KnapsackGA(int popS, int n, int s, Vector<Item> itemp) {
-		bestV = 0;
+		
 		sol = new Chromosome(n);
-		/*
-		 * for(int i=0;i<n;i++) { sol.genes[i]=0; }
-		 */
-		sol.generateGenes();
-
+		for(int i=0;i<n;i++) { sol.genes[i]=0; }
+		bestV=0;
+		/*sol.generateGenes();
+		sol.calcFitness(itemp, s);
+		bestV=sol.fitness;*/
 		pop = new Vector<Chromosome>();
 		items = new Vector<Item>();
 		items = itemp;
@@ -70,7 +70,7 @@ public class KnapsackGA {
 	public Vector<Integer> crossOver(Vector<Integer> selected) {
 
 		Random random = new Random();
-		for (int k = 0; k < selected.size() / 2 - 1; k += 2) {
+		for (int k = 0; k < selected.size() - 1; k += 2) {
 			double r = random.nextDouble();
 			if (r <= 0.7) {
 				int begin = random.nextInt(n - 1);
