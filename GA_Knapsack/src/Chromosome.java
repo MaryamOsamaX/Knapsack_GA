@@ -32,7 +32,7 @@ public class Chromosome {
 			totalValue += items.get(i).value * genes[i];
 		}
 		if (totalWeight > s) {
-			fitness = 1 / totalWeight; 
+			fitness = 1 / totalValue; 
 		} else {
 			fitness = totalValue;
 		}
